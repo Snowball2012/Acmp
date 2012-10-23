@@ -1,9 +1,9 @@
-/*TODO:FINISH FinishWrite*/
+/*TODO:*/
 #include <stdio.h>
 #include "common.h"
 
 
-struct File NewFile(const char * filename, char * status)
+struct File NewFile(char * filename, char * status)
 {
 	struct File file;
 	file.name = filename;
@@ -36,6 +36,19 @@ void WriteBit(char bit, CFile * file)
 	file->bitIndex = i;
 }
 
-/* TODO:FINISH FinishWrite */
+void WriteByte(char byte, DFile * file)
+{
+	fwrite(&byte, sizeof(char), 1, file->desc);
+	file->buffer = 0;
+	file->bitIndex = 0;
+}
 
-void FinishWrite
+void FinishWrite(CFile * file)
+{
+	fwrite(&(file->buffer), sizeof(char), 1, file->desc);
+	file->buffer = 0;
+	file->bitIndex = 0;
+	file->status = CLOSED;
+	fclose(file->desc);
+	file->desc = NULL;
+}
