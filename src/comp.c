@@ -1,3 +1,5 @@
+//TODO:write functions for tables and ppm
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -7,7 +9,13 @@
 
 void Compress(char * infile, char * outfile)
 {
-	DFile dataFile = NewFile(infile, O_RDONLY);
-	CFile compFile = NewFile(outfile, O_WRONLY|O_CREAT);
+	unsigned long long l, h, divisor, firstQtr, thirdQtr, half;
+	l = 0;
+	h = ULLONG_MAX;
+	divisor = 
+	DFile dataFile = NewFile(infile, "r");
+	CFile compFile = NewFile(outfile, "w");
+	while (!feof(dataFile.desc)) {
+	}
 
 }

@@ -1,9 +1,9 @@
-/*TODO:deal with fopen and char* /int status */
+
 #include <stdio.h>
 #include "common.h"
 
 
-struct File NewFile(char * filename, int status)
+struct File NewFile(char * filename, const char * status)
 {
 	struct File file;
 	file.name = filename;

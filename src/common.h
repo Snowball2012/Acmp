@@ -13,7 +13,7 @@
 struct File {
 	char * name;
 	FILE * desc;
-	int status;
+	const char * status;
 	char bitIndex;
 	char buffer;
 };
@@ -21,7 +21,7 @@ struct File {
 typedef struct File CFile;
 typedef struct File DFile;
 
-struct File NewFile(char * filename, int status);
+struct File NewFile(char * filename, const char * status);
 char GetSymbol(CFile * file);
 void WriteBit(char bit, CFile * file);
 void WriteByte(char byte, DFile * file);
