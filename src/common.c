@@ -14,14 +14,14 @@ struct File NewFile(char * filename, const char * status)
 	return file;
 }
 
-char GetSymbol(CFile * file)
+unsigned char GetSymbol(CFile * file)
 {
-	char c;
+	unsigned char c;
 	fread(&c, sizeof(char), 1, file->desc);
 	return c;
 }
 
-void WriteBit(char bit, CFile * file)
+void WriteBit(unsigned char bit, CFile * file)
 {
 	char i;
 	i = file->bitIndex;
@@ -36,7 +36,7 @@ void WriteBit(char bit, CFile * file)
 	file->bitIndex = i;
 }
 
-void WriteByte(char byte, DFile * file)
+void WriteByte(unsigned char byte, DFile * file)
 {
 	fwrite(&byte, sizeof(char), 1, file->desc);
 	file->buffer = 0;

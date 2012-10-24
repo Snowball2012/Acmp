@@ -22,9 +22,9 @@ typedef struct File CFile;
 typedef struct File DFile;
 
 struct File NewFile(char * filename, const char * status);
-char GetSymbol(CFile * file);
-void WriteBit(char bit, CFile * file);
-void WriteByte(char byte, DFile * file);
+unsigned char GetSymbol(DFile * file);
+void WriteBit(unsigned char bit, CFile * file);
+void WriteByte(unsigned char byte, DFile * file);
 void FinishWrite(CFile * file);
 
 #endif 
