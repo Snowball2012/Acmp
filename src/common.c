@@ -18,6 +18,10 @@ unsigned char GetSymbol(CFile * file)
 {
 	unsigned char c;
 	fread(&c, sizeof(char), 1, file->desc);
+	if(feof(file->desc)) {
+		c = 0;
+		file->status = "eof";
+	}
 	return c;
 }
 
