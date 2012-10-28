@@ -25,6 +25,7 @@ struct File NewFile(char * filename, const char * status);
 unsigned char GetSymbol(DFile * file);
 void WriteBit(unsigned char bit, CFile * file);
 void WriteByte(unsigned char byte, DFile * file);
-void FinishWrite(CFile * file);
+void FinishWrite(CFile * file, unsigned long long i);
+unsigned char GetBit(CFile * file);
 
 #endif 

@@ -3,10 +3,11 @@
 
 int RecalcWeight(int * weights,unsigned char c, int * aggresivity)
 {
-	if (weights[255]>DEFAULT_MAX_SIZE)
-		for(; c<=255; c++) 
-			weights[c] /= 2;
-	for(; c<=255; c++)
-		weights[c] += *aggresivity;
-	return weights[255];
+	int i;
+	if (weights[256]>DEFAULT_MAX_SIZE)
+		for(i = 0; i<=256; i++) 
+			weights[i] /= 2;
+	for(i = c; i<=256; i++)
+		weights[i] += *aggresivity;
+	return weights[256];
 }

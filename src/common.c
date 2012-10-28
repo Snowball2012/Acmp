@@ -11,6 +11,8 @@ struct File NewFile(char * filename, const char * status)
 	file.bitIndex = 0;
 	file.buffer = 0;
 	file.desc = fopen(filename, status);
+	if (!file.desc)
+		printf("\nNULL POINTER!!!!!!\n");
 	return file;
 }
 
@@ -47,12 +49,34 @@ void WriteByte(unsigned char byte, DFile * file)
 	file->bitIndex = 0;
 }
 
-void FinishWrite(CFile * file)
+void FinishWrite(CFile * file,unsigned long long i)
 {
 	fwrite(&(file->buffer), sizeof(char), 1, file->desc);
+	fwrite(&i, sizeof(long long), 1, file->desc);
 	file->buffer = 0;
 	file->bitIndex = 0;
 	file->status = CLOSED;
 	fclose(file->desc);
 	file->desc = NULL;
+}
+
+unsigned char GetBit(CFile * file)
+{
+	char bit;
+	char i;
+	i = file->bitIndex;
+	bit &= file->buffer;
+	i++;
+	if(i>7){
+		i = 0;
+		fread(&(file->buffer), sizeof(char), 1, file->desc);
+		if(feof(file->desc)) {
+			bit = 0;
+			file->status = "eof";
+		}
+		file->buffer = 0;
+	}
+	file->bitIndex = i;
+	bit <<= i;
+	return bit;
 }
