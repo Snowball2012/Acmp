@@ -9,11 +9,12 @@ int main(int argc, char ** argv)
 		return 1;
 	switch (*argv[1]) {
 		case 'c':
-			printf("compressing\n");
-			Compress(argv[2], argv[3]);
+			if(argc>3)
+				Compress(argv[2], argv[3], argv[4]);
+			else
+				Compress(argv[2], argv[3], "ari");
 			break;
 		case 'd':
-			printf("decompressing\n");
 			Decompress(argv[2], argv[3]);
 			break;
 		default:
