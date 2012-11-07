@@ -1,6 +1,6 @@
 #include <math.h>
 #include "ppm.h"
-#define  DW2AGGR_COEF 100.0f
+#define  DW2AGGR_COEF 50.0f
 
 
 int RecalcWeight(unsigned char c, char mode)
@@ -40,10 +40,9 @@ int RecalcAggr(void)
 		dw += abs(t->weights[i]-t->weights[i-1] - t->old[i] + t->old[i-1]);
 	}
     dw /= (t->weights[256] + t->old[256]);
-	for(i = 1; i<257; i++) { 
+	for(i = 1; i<257; i++) 
 		t->old[i] = t->weights[i];
-		t->aggresivity = (int)(sqrt(dw)*DW2AGGR_COEF);
-	}
+	t->aggresivity = (int)(dw*DW2AGGR_COEF*DEFAULT_AGGR/t->aggresivity)*2;
 	return 0;
 }
 
@@ -55,8 +54,8 @@ void InitTable(void)
 			weights[i][j].count = 0;
 			weights[i][j].aggresivity = DEFAULT_AGGR;
 			for (k = 0; k<=256; k++) {
-				(weights[i][j].old)[k] = k*DEFAULT_AGGR;
-				(weights[i][j].weights)[k] = k*DEFAULT_AGGR;
+				(weights[i][j].old)[k] = k*10*DEFAULT_AGGR;
+				(weights[i][j].weights)[k] = k*10*DEFAULT_AGGR;
 			}
 		}
 	prev = 0;

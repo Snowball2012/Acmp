@@ -8,7 +8,6 @@
 #include "decomp.h"
 #include "ppm.h"
 
-extern int oldTable[257];
 
 void Decompress(char * infile, char * outfile)
 {
@@ -44,12 +43,12 @@ void Decompress(char * infile, char * outfile)
 		unsigned long long old_l, old_h;
 		/*seek for c*/
 
-		for (c = 255; (h-l)*(weights[prev2][prev].weights)[c] > (value-l)*divisor; c--);
+		for (c = 255; (h-l)*(weights[prev2][prev].weights)[c] > (value-l)*(weights[prev2][prev].weights)[256]; c--);
 		
 		old_l = l;
 		old_h = h;
-		l = old_l + (old_h-old_l + 1)*(weights[prev2][prev].weights)[c]/divisor;
-		h = old_l + (old_h-old_l + 1)*(weights[prev2][prev].weights)[c+1]/divisor-1;  
+		l = old_l + (old_h-old_l + 1)*((double)(weights[prev2][prev].weights)[c]/(double)(weights[prev2][prev].weights)[256]);
+		h = old_l + (old_h-old_l + 1)*((double)(weights[prev2][prev].weights)[c+1]/(double)(weights[prev2][prev].weights)[256])-1;
 		for (;;) { /* Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn (,;,;,) */
 			if (h < half)
 				;
@@ -67,7 +66,7 @@ void Decompress(char * infile, char * outfile)
 			value+=value+GetBit(&compFile);
 		}	
 		WriteByte(c, &dataFile);
-		divisor = RecalcWeight(c,mode);
+		RecalcWeight(c,mode);
 		i--;
 		if(i == 0){
 			fclose(dataFile.desc);

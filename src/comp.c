@@ -54,8 +54,8 @@ void Compress(char * infile, char * outfile, const char * mode)
 		}	
 		old_l = l;
 		old_h = h;
-		l = old_l + (old_h-old_l + 1)*(weights[prev2][prev].weights)[c]/(weights[prev2][prev].weights)[256];
-		h = old_l + (old_h-old_l + 1)*(weights[prev2][prev].weights)[c+1]/(weights[prev2][prev].weights)[256]-1;      
+		l = old_l + (old_h-old_l + 1)*((double)(weights[prev2][prev].weights)[c]/(double)(weights[prev2][prev].weights)[256]);
+		h = old_l + (old_h-old_l + 1)*((double)(weights[prev2][prev].weights)[c+1]/(double)(weights[prev2][prev].weights)[256])-1;      
 		
 		for (;;) {  /* Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn (,;,;,) */
 			if (h < half)
@@ -73,7 +73,7 @@ void Compress(char * infile, char * outfile, const char * mode)
 			l+=l;
 			h+=h+1;
 		}
-		divisor = RecalcWeight(c,m);
+		RecalcWeight(c,m);
 		i++;
 		if(i%1000000==0)
 			printf("%lld\n",i);

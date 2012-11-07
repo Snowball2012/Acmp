@@ -10,6 +10,7 @@ typedef struct {
 	int count;
 	int divisor;
 	int aggresivity;
+	int oldAgr;
 } Table;
 
 
