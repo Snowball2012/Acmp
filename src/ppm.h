@@ -2,7 +2,7 @@
 #define PPM_H
 
 #define DEFAULT_AGGR 50
-#define DEFAULT_MAX_SIZE 65000
+#define DEFAULT_MAX_SIZE 650000
 
 typedef struct {
 	int weights[257];

@@ -43,7 +43,12 @@ void Decompress(char * infile, char * outfile)
 		unsigned long long old_l, old_h;
 		/*seek for c*/
 
-		for (c = 255; (h-l)*(weights[prev2][prev].weights)[c] > (value-l)*(weights[prev2][prev].weights)[256]; c--);
+		for (c = 255; ; c--) {
+			unsigned long long temp = ((value-l)*((weights[prev2][prev].weights)[256]))/(h-l);
+			if ((weights[prev2][prev].weights)[c] <= temp)
+				break;
+		}
+			
 		
 		old_l = l;
 		old_h = h;

@@ -13,6 +13,7 @@ int main(int argc, char ** argv)
 				Compress(argv[2], argv[3], argv[4]);
 			else
 				Compress(argv[2], argv[3], "ari");
+			Decompress(argv[3], argv[5]);
 			break;
 		case 'd':
 			Decompress(argv[2], argv[3]);

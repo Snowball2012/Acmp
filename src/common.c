@@ -53,7 +53,7 @@ void WriteByte(unsigned char byte, DFile * file)
 void FinishWrite(CFile * file,unsigned long long i, int btf, const char * mode)
 {
 	char m;
-	if(btf)
+	//if(btf)
 		WriteBit(1, file);
 	fwrite(&(file->buffer), sizeof(char), 1, file->desc);
 	fwrite(&i, sizeof(long long), 1, file->desc);

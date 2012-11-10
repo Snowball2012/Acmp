@@ -18,7 +18,7 @@ int RecalcWeight(unsigned char c, char mode)
 			}
 		}
 	for(i = c + 1; i<=256; i++)
-		w[i] += weights[prev2][prev].aggresivity;
+		w[i] += weights[prev2][prev].aggresivity*(int)(exp((double)mode));
 	count = &(weights[prev2][prev].count);
 	(*count)++;
 	if(*count > 10240){
@@ -42,7 +42,7 @@ int RecalcAggr(void)
     dw /= (t->weights[256] + t->old[256]);
 	for(i = 1; i<257; i++) 
 		t->old[i] = t->weights[i];
-	t->aggresivity = (int)(dw*DW2AGGR_COEF*DEFAULT_AGGR/t->aggresivity)*2;
+	t->aggresivity = (int)(sqrt(dw)*DW2AGGR_COEF*DEFAULT_AGGR/t->aggresivity)*2;
 	return 0;
 }
 
